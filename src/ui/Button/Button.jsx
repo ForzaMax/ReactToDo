@@ -12,7 +12,7 @@ export const Button = ({ type }) => {
         onClick={() => addTask(inputValue)}
         className={style.btn__addtask}
       >
-        Добавитья
+        Добавить
       </button>
     ),
     remove_done: (
