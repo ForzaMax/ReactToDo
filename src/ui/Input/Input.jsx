@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./Input.module.scss";
+import { TodosContext } from "../../app/providers/TodosContext/TodosProvider";
 
-export const Input = ({ value, onChange }) => {
-
+export const Input = () => {
+  const { inputValue, inputHandler } = useContext(TodosContext);
+  console.log(inputValue)
+  
   return (
     <input
-      value={value}
-      onChange={onChange}
+      value={inputValue}
+      onChange={inputHandler}
       className={style.input}
       type="text"
       placeholder="Новая задача"

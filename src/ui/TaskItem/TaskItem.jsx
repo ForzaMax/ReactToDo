@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./TaskItem.module.scss";
+import { TodosContext } from "../../app/providers/TodosContext/TodosProvider";
 
-export const TaskItem = ({ text, done, id, toggleTaskDone, removeTask }) => {
-  
-  
-  
-  
+export const TaskItem = ({ text, done, id }) => {
+  const { toggleTaskDone, removeTask } = useContext(TodosContext);
+
   return (
     <li className={style.task__item}>
       <label className={style.task__label}>
@@ -18,7 +17,7 @@ export const TaskItem = ({ text, done, id, toggleTaskDone, removeTask }) => {
         <span className={style.task__text}>{text}</span>
       </label>
 
-      <button  className={style.task__btn_edit}>✏️</button>
+      <button className={style.task__btn_edit}>✏️</button>
       <button onClick={() => removeTask(id)} className={style.task__btn_delete}>
         ❌
       </button>

@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./Button.module.scss";
+import { TodosContext } from "../../app/providers/TodosContext/TodosProvider";
 
-export const Button = ({
-  addTask,
-  type,
-  removeAllTasks,
-  removeCompletedTasks,
-}) => {
+export const Button = ({ type }) => {
+  const { addTask, removeAllTasks, removeCompletedTasks, inputValue } =
+    useContext(TodosContext);
+
   const typeOfButton = {
     primary: (
-      <button onClick={addTask} className={style.btn__addtask}>
-        Добавить
+      <button
+        onClick={() => addTask(inputValue)}
+        className={style.btn__addtask}
+      >
+        Добавитья
       </button>
     ),
     remove_done: (

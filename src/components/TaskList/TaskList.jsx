@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./TaskList.module.scss";
 import { TaskItem } from "../../ui/TaskItem/TaskItem";
+import { TodosContext } from "../../app/providers/TodosContext/TodosProvider";
 
-export const TaskList = ({ tasks, toggleTaskDone, removeTask }) => {
+export const TaskList = () => {
+  const {tasks} = useContext(TodosContext)
+
   return (
     <ul className={style.task__list}>
       {tasks.map((task) => (
@@ -11,9 +14,6 @@ export const TaskList = ({ tasks, toggleTaskDone, removeTask }) => {
           text={task.text}
           done={task.done}
           id={task.id}
-          toggleTaskDone={toggleTaskDone}
-          removeTask={removeTask}
-
         />
       ))}
     </ul>
