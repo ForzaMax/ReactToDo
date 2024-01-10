@@ -3,10 +3,12 @@ import { createContext, useState, useEffect } from "react";
 export const TodosContext = createContext(null);
 
 export const TodosProvider = ({ children }) => {
-  const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem(process.env.REACT_APP_LS_TODO_KEY);
-    return savedTasks ? JSON.parse(savedTasks) : [];
-  });
+  const savedTasks = JSON.parse(
+    localStorage.getItem(process.env.REACT_APP_LS_TODO_KEY)
+  );
+  const initialState = savedTasks ?? [];
+
+  const [tasks, setTasks] = useState(initialState);
 
   // При любом измении массива идёт запись в LocalStorage
   useEffect(() => {
@@ -16,24 +18,18 @@ export const TodosProvider = ({ children }) => {
     );
   }, [tasks]);
 
-  // Контроль инпута
-  const [inputValue, setValue] = useState("");
-  function inputHandler(e) {
-    setValue(e.target.value);
-  }
-
   // Добавление таски
-  function addTask(inputValue) {
-    if (inputValue.length) {
-      const newTask = {
-        text: inputValue,
-        done: false,
-        id: Date.now(),
-      };
-      setTasks([...tasks, newTask]);
-      setValue("");
-    } else setValue("");
-  }
+  // function addTask(inputValue) {
+  //   if (inputValue.length) {
+  //     const newTask = {
+  //       text: inputValue,
+  //       done: false,
+  //       id: Date.now(),
+  //     };
+  //     setTasks([...tasks, newTask]);
+  //     setValue("");
+  //   } else setValue("");
+  // }
 
   // Удаление ВСЕХ задач
   function removeAllTasks() {
@@ -68,9 +64,8 @@ export const TodosProvider = ({ children }) => {
 
   const contextValue = {
     tasks,
-    inputValue,
-    inputHandler,
-    addTask,
+    setTasks,
+    // addTask,
     toggleTaskDone,
     removeAllTasks,
     removeCompletedTasks,

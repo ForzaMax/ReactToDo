@@ -1,28 +1,22 @@
 import React, { useContext } from "react";
 import style from "./Button.module.scss";
-import { TodosContext } from "../../app/providers/TodosContext/TodosProvider";
 
-export const Button = ({ type }) => {
-  const { addTask, removeAllTasks, removeCompletedTasks, inputValue } =
-    useContext(TodosContext);
+export const Button = ({ type, onClick, children }) => {
 
   const typeOfButton = {
     primary: (
-      <button
-        onClick={() => addTask(inputValue)}
-        className={style.btn__addtask}
-      >
-        Добавить
+      <button onClick={onClick} className={style.btn__addtask}>
+        {children}
       </button>
     ),
     remove_done: (
-      <button onClick={removeCompletedTasks} className={style.btn__removedone}>
-        Удалить завершенные
+      <button onClick={onClick} className={style.btn__removedone}>
+        {children}
       </button>
     ),
     remove_all: (
-      <button onClick={removeAllTasks} className={style.btn__removeall}>
-        Удалить все
+      <button onClick={onClick} className={style.btn__removeall}>
+        {children}
       </button>
     ),
   };
