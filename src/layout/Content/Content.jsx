@@ -18,9 +18,9 @@ export const Content = () => {
   }
 
   function addTask(inputValue) {
-    if (inputValue.length) {
+    if (inputValue.trim().length) {
       const newTask = {
-        text: inputValue,
+        text: inputValue.trim(),
         done: false,
         id: Date.now(),
       };
